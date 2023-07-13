@@ -10,6 +10,13 @@ import tiktoken
 
 logger = logging.getLogger(__name__)
 
+openai.api_type = "azure"
+openai.api_key = "ENTER KEY HERE" # TODO: Check if this key is already set by the environment, do we need to provide this line?
+openai.api_base = "API ENDPOINT OF DEPLOYMENT"
+openai.api_version = "2023-05-15"
+deployment_name="NAME OF DEPLOYMENT"
+
+logger.debug(openai.api_base)
 
 @dataclass
 class TokenUsage:
@@ -66,9 +73,10 @@ class AI:
 
         logger.debug(f"Creating a new chat completion: {messages}")
         response = openai.ChatCompletion.create(
+            engine=deployment_name, 
             messages=messages,
             stream=True,
-            model=self.model,
+            # model=self.model,
             temperature=self.temperature,
         )
 

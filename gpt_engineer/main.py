@@ -24,9 +24,10 @@ def main(
     ),
     verbose: bool = typer.Option(False, "--verbose", "-v"),
 ):
-    logging.basicConfig(level=logging.DEBUG if verbose else logging.INFO)
+    # logging.basicConfig(level=logging.DEBUG if verbose else logging.INFO)
+    logging.basicConfig(level=logging.INFO)
 
-    model = fallback_model(model)
+    # model = fallback_model(model)
     ai = AI(
         model=model,
         temperature=temperature,
